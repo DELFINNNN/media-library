@@ -3,7 +3,7 @@ package com.medialibrary.model;
 import java.time.LocalDate;
 
 public abstract class MediaItem {
-    protected String id;
+    protected int id;
     protected String title;
     protected String creator;
 
@@ -17,7 +17,7 @@ public abstract class MediaItem {
     protected LocalDate dateCompleted;
 
     public MediaItem(String title, String creator, int year, int totalValue) {
-        this.id = "TEMP";
+        this.id = 0;
         this.title = title;
         this.creator = creator;
         this.year = year;
@@ -33,7 +33,7 @@ public abstract class MediaItem {
     public abstract String getProgressDisplay();
 
     // ГЕТТЕРЫ
-    public String getId(){
+    public int getId(){
         return id;
     }
     public String getTitle() {
@@ -62,6 +62,9 @@ public abstract class MediaItem {
     }
 
     // СЕТТЕРЫ
+    public void setId(int id){
+        this.id = id;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
