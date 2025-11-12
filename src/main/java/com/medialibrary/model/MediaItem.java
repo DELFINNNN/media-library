@@ -2,6 +2,15 @@ package com.medialibrary.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Book.class, name = "book"),
+        @JsonSubTypes.Type(value = Movie.class, name = "movie")
+})
 public abstract class MediaItem {
     protected int id;
     protected String title;
@@ -15,6 +24,8 @@ public abstract class MediaItem {
 
     protected LocalDate dateAdded;
     protected LocalDate dateCompleted;
+
+    public MediaItem(){};
 
     public MediaItem(String title, String creator, int year, int totalValue) {
         this.id = 0;

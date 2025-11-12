@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Book extends MediaItem{
 
+    public Book(){};
+
     public Book(String title, String creator, int year, int totalValue){
         super(title, creator, year, totalValue);
     }

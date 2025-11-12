@@ -3,6 +3,9 @@ package com.medialibrary.model;
 import java.time.LocalDate;
 
 public class Movie extends MediaItem{
+
+    public Movie(){};
+
     public Movie(String title, String creator, int year, int totalValue){
         super(title, creator, year, totalValue);
     }

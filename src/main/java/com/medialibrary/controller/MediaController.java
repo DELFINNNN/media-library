@@ -1,11 +1,22 @@
 package com.medialibrary.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.medialibrary.data.JacksonFileHandler;
 import com.medialibrary.model.MediaItem;
 
 public class MediaController {
     private ArrayList<MediaItem> library = new ArrayList<>();
     int nextId = 1;
+
+    private final JacksonFileHandler fileHandler;
+    private final static String FILE_NAME = "media_library.json";
+
+    public MediaController(){
+        fileHandler = new JacksonFileHandler();
+        loadLibrary();
+    }
 
     public void addItem(MediaItem item){
         if (item == null){
@@ -37,6 +48,37 @@ public class MediaController {
         }
         else{
             throw new IllegalArgumentException("Элемент с ID " + id + " не найден в билиотеке.");
+        }
+    }
+
+    public void updateNextId(){
+        int maxId = 0;
+
+        for (MediaItem item : library){
+            int currentId = item.getId();
+            if (currentId > maxId){
+                maxId = currentId;
+            }
+        }
+        nextId = maxId + 1;
+    }
+
+    private void loadLibrary(){
+        try{
+            ArrayList<MediaItem> loadedList = fileHandler.load(FILE_NAME);
+            library = loadedList;
+            updateNextId();
+        } catch (IOException e){
+            System.out.println("Файл библиотеки не найден! Начинаем с путой коллекции");
+        }
+    }
+
+    private void saveLibrary(){
+        try{
+            fileHandler.save(library, FILE_NAME);
+            System.out.println("Библиотека успешно сохранена");
+        } catch (IOException e){
+            System.out.println("Ошибка при сохранении библиотеки!" + e.getMessage());
         }
     }
 }
