@@ -47,6 +47,14 @@ public abstract class MediaItem {
     public int getId(){
         return id;
     }
+    public String getTypeDisplay(){
+        if (this instanceof Book){
+            return "Книга";
+        }
+        else{
+            return "Фильм";
+        }
+    }
     public String getTitle() {
         return title;
     }

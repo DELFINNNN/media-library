@@ -63,7 +63,7 @@ public class MediaController {
         nextId = maxId + 1;
     }
 
-    private void loadLibrary(){
+    public void loadLibrary(){
         try{
             ArrayList<MediaItem> loadedList = fileHandler.load(FILE_NAME);
             library = loadedList;
@@ -73,7 +73,7 @@ public class MediaController {
         }
     }
 
-    private void saveLibrary(){
+    public void saveLibrary(){
         try{
             fileHandler.save(library, FILE_NAME);
             System.out.println("Библиотека успешно сохранена");
